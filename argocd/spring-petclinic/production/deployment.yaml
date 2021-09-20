@@ -4,3 +4,8 @@ metadata:
   name: spring-petclinic
 spec:
   replicas: 4
+  template:
+    spec:
+      containers:
+      - image: harbor.markalston.net/tanzu/spring-petclinic@sha256:f5c820ccec10d7c86f9a1d2ca24dad9df9e0995d0982eaa26528f801c76ad66d
+        imagePullPolicy: Always
