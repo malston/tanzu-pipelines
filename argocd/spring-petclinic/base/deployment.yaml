@@ -22,3 +22,7 @@ spec:
     spec:
       containers:
       - image: malston/spring-petclinic:2.5.0
+        name: spring-petclinic
+        ports:
+        - containerPort: 8080
+          protocol: TCP
