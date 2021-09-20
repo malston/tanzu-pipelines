@@ -113,10 +113,7 @@ $ kubectl create ns spring-petclinic-development
 Deploy the Development version of the Spring PetClinic Application. This version shares the base configuration from the `argocd/base` folder but overrides the following configuration values:
 
 - 2 replicas in the deployment
-- Service Type of `ClusterIP` instead of `LoadBalancer` as
-
-we will be running E2E tests against the application via another Pod deployed in the same cluster so we don't need to waste a VIP and Service type `LoadBalancer`.
-
+- Service Type of `ClusterIP` instead of `LoadBalancer` as we will be running E2E tests against the application via another Pod deployed in the same cluster so we don't need to waste a VIP and Service type `LoadBalancer`.
 - Deployed to the "spring-petclinic-development" Namespace in our Kubernetes cluster.
 
 ```sh
