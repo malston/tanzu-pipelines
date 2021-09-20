@@ -122,7 +122,7 @@ we will be running E2E tests against the application via another Pod deployed in
 ```sh
 $ argocd app create spring-petclinic-dev \
   --repo https://github.com/malston/tanzu-pipelines.git \
-  --path argocd/petclinic/dev \
+  --path argocd/spring-petclinic/dev \
   --dest-server `kubectl config view -o jsonpath="{.clusters[?(@.name=='$(yq e .workload-cluster.name $PARAMS_YAML)')].cluster.server}"` \
   --dest-namespace spring-petclinic-development \
   --sync-policy automated
@@ -139,7 +139,7 @@ Deploy the Production version of the Spring PetClinic Application. This version 
 ```sh
 $ argocd app create spring-petclinic-prod \
   --repo https://github.com/malston/tanzu-pipelines.git \
-  --path argocd/petclinic-teller/production \
+  --path argocd/spring-petclinic/production \
   --dest-server `kubectl config view -o jsonpath="{.clusters[?(@.name=='$(yq e .workload-cluster.name $PARAMS_YAML)')].cluster.server}"` \
   --dest-namespace spring-petclinic-production \
   --sync-policy automated
