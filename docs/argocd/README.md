@@ -164,7 +164,7 @@ Look at the ArgoCD applications in the ArgoCD UI.
 Get details on the ArgoCD Spring PetClinic Development application in the ArgoCD UI.
 ![Image of App Details](../argocd-app-details-dev.png)
 
-Get details on the ArgoCD Spring PetClinic Development application in the ArgoCD UI.
+Get details on the ArgoCD Spring PetClinic Production application in the ArgoCD UI.
 ![Image of App Details](../argocd-app-details-prod.png)
 
 ## Access the applications
