@@ -90,7 +90,7 @@ service/guestbook-ui patched
 Test access to the ArgoCD Web UI
 
 ```sh
-$ echo $(yq e .argocd.server-fqdn $PARAMS_YAML)
+echo $(yq e .argocd.server-fqdn $PARAMS_YAML)
 ```
 
 1. In Chrome, navigate to the UI on address above
@@ -151,7 +151,6 @@ List the applications to see the current status using the ArgoCD Cli.
 
 ```sh
 $ argocd app list
-
 NAME              CLUSTER                      NAMESPACE    PROJECT  STATUS  HEALTH       SYNCPOLICY  CONDITIONS  REPO                                                      PATH               TARGET
 spring-petclinic-dev   https://192.168.40.107:6443  development  default  Synced  Progressing  Auto        <none>      https://github.com/malston/tanzu-pipelines.git  argocd/dev         argocd-integration-exercise
 spring-petclinic-prod  https://192.168.40.107:6443  production   default  Synced  Progressing  Auto        <none>      https://github.com/malston/tanzu-pipelines.git  argocd/production  argocd-integration-exercise
