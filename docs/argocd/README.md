@@ -131,7 +131,7 @@ Deploy the Production version of the Spring PetClinic Application. This version 
 
 - 4 replicas in the deployment
 - Service Type of `LoadBalancer` to expose the application outside the Kubernetes cluster.
-- Container image to ensure the application is pulled a safe location and the name-tag pair reference is resolved to a digest reference
+- Container image to ensure the application is pulled a Production registry and the name-tag pair reference is resolved to a digest reference
 - Deployed to the "spring-petclinic-production" Namespace in our Kubernetes cluster.
 
 Run the following command to replace the container image with the latest one from Production image repository
