@@ -12,6 +12,7 @@ generated/
 .DS_Store
 local-config/*
 !local-config/.gitkeep
+concourse/build/
 crashd/*
 !crashd/.gitkeep
 tkg-mgmt.diagnostics.tar.gz
