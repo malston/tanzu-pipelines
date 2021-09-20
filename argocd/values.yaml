@@ -1,0 +1,13 @@
+configs:
+  secret:
+    # Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
+    # `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
+    argocdServerAdminPassword: BCRYPTED_PWORD
+installCRDs: false
+server:
+  certificate:
+    enabled: true
+    domain: ARGOCD_CN
+    issuer:
+      name: letsencrypt-prod
+      kind: ClusterIssuer
