@@ -161,7 +161,7 @@ guestbook         https://192.168.40.107:6443  default      default  Synced  Hea
 Look at the ArgoCD applications in the ArgoCD UI.
 ![Image of Apps](../argocd-apps.png)
 
-Get details on the ArgoCD Production Spring PetClinic application in the ArgoCD UI.
+Get details on the ArgoCD Spring PetClinic Development application in the ArgoCD UI.
 ![Image of App Details](../argocd-app-details.png)
 
 ## Access the applications
