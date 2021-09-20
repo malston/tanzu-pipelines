@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # annotations:
+  #   link.argocd.argoproj.io/external-link: spring-petclinic-service.default.svc.cluster.local
+  labels:
+    app: spring-petclinic
+  name: spring-petclinic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-petclinic
+  template:
+    metadata:
+      labels:
+        app: spring-petclinic
+      annotations:
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - image: harbor.markalston.net/tanzu/spring-petclinic@sha256:f5c820ccec10d7c86f9a1d2ca24dad9df9e0995d0982eaa26528f801c76ad66d
+        imagePullPolicy: Always

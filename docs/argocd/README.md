@@ -106,45 +106,45 @@ In this example we will use ArgoCD CLI to deploy two different configurations fo
 Create two different namespaces for the two different configurations of our application. this could easily be two different clusters as well.
 
 ```sh
-$ kubectl create ns fortune-app-production
-$ kubectl create ns fortune-app-development
+$ kubectl create ns spring-petclinic-production
+$ kubectl create ns spring-petclinic-development
 ```
 
-Deploy the Development version of the fortune Application. This version shares the base configuration from the argocd/base folder but overrides the following configuration values:
+Deploy the Development version of the Spring PetClinic Application. This version shares the base configuration from the `argocd/base` folder but overrides the following configuration values:
 
 - 2 replicas in the deployment
 - Service Type of `ClusterIP` instead of `LoadBalancer` as
 
-we will be running E2E tests against the application via another Pod deployed in the same cluster so we don’t need to waste a VIP and Service type LoadBalancer.
+we will be running E2E tests against the application via another Pod deployed in the same cluster so we don't need to waste a VIP and Service type `LoadBalancer`.
 
-- Deployed to the "fortune-app-development" Namespace in our Kubernetes cluster.
+- Deployed to the "spring-petclinic-development" Namespace in our Kubernetes cluster.
 
 ```sh
-$ argocd app create fortune-app-dev \
+$ argocd app create spring-petclinic-dev \
   --repo https://github.com/malston/tanzu-pipelines.git \
-  --path argocd/fortune-teller/dev \
+  --path argocd/petclinic/dev \
   --dest-server `kubectl config view -o jsonpath="{.clusters[?(@.name=='$(yq e .workload-cluster.name $PARAMS_YAML)')].cluster.server}"` \
-  --dest-namespace fortune-app-development \
+  --dest-namespace spring-petclinic-development \
   --sync-policy automated
 
-application 'fortune-app-dev' created
+application 'spring-petclinic-dev' created
 ```
 
-Deploy the Production version of the fortune Application. This version shares the base configuration from the argocd/base folder but overrides the following configuration values:
+Deploy the Production version of the Spring PetClinic Application. This version shares the base configuration from the `argocd/base` folder but overrides the following configuration values:
 
 - 4 replicas in the deployment
 - Service Type of `LoadBalancer` to expose the application outside the Kubernetes cluster.
-- Deployed to the "fortune-app-production" Namespace in our Kubernetes cluster.
+- Deployed to the "spring-petclinic-production" Namespace in our Kubernetes cluster.
 
 ```sh
-$ argocd app create fortune-app-prod \
+$ argocd app create spring-petclinic-prod \
   --repo https://github.com/malston/tanzu-pipelines.git \
-  --path argocd/fortune-teller/production \
+  --path argocd/petclinic-teller/production \
   --dest-server `kubectl config view -o jsonpath="{.clusters[?(@.name=='$(yq e .workload-cluster.name $PARAMS_YAML)')].cluster.server}"` \
-  --dest-namespace fortune-app-production \
+  --dest-namespace spring-petclinic-production \
   --sync-policy automated
 
-application 'fortune-app-prod' created
+application 'spring-petclinic-prod' created
 ```
 
 List the applications to see the current status using the ArgoCD Cli.
@@ -153,15 +153,15 @@ List the applications to see the current status using the ArgoCD Cli.
 $ argocd app list
 
 NAME              CLUSTER                      NAMESPACE    PROJECT  STATUS  HEALTH       SYNCPOLICY  CONDITIONS  REPO                                                      PATH               TARGET
-fortune-app-dev   https://192.168.40.107:6443  development  default  Synced  Progressing  Auto        <none>      https://github.com/malston/tanzu-pipelines.git  argocd/dev         argocd-integration-exercise
-fortune-app-prod  https://192.168.40.107:6443  production   default  Synced  Progressing  Auto        <none>      https://github.com/malston/tanzu-pipelines.git  argocd/production  argocd-integration-exercise
+spring-petclinic-dev   https://192.168.40.107:6443  development  default  Synced  Progressing  Auto        <none>      https://github.com/malston/tanzu-pipelines.git  argocd/dev         argocd-integration-exercise
+spring-petclinic-prod  https://192.168.40.107:6443  production   default  Synced  Progressing  Auto        <none>      https://github.com/malston/tanzu-pipelines.git  argocd/production  argocd-integration-exercise
 guestbook         https://192.168.40.107:6443  default      default  Synced  Healthy      Auto        <none>      https://github.com/argoproj/argocd-example-apps.git       guestbook
 ```
 
 Look at the ArgoCD applications in the ArgoCD UI.
 ![Image of Apps](../argocd-apps.png)
 
-Get details on the ArgoCD Production fortune-app application in the ArgoCD UI.
+Get details on the ArgoCD Production Spring PetClinic application in the ArgoCD UI.
 ![Image of App Details](../argocd-app-details.png)
 
 ## Access the applications
@@ -169,11 +169,11 @@ Get details on the ArgoCD Production fortune-app application in the ArgoCD UI.
 - Development using a port-forward connection
 
 ```sh
-kubectl port-forward deployment/dev-fortune-app 8080 -n fortune-app-development &
+kubectl port-forward deployment/dev-spring-petclinic 8080 -n spring-petclinic-development &
 ```
 
 - Production using the Load Balancer IP
 
 ```sh
-open http://$(kubectl get services prod-fortune-service -n fortune-app-production -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+open http://$(kubectl get services prod-petclinic-service -n spring-petclinic-production -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 ```

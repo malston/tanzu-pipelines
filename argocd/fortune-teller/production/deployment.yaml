@@ -1,7 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: fortune-app
-  link.argocd.argoproj.io/external-link: http://192.168.11.132/
-spec:
-  replicas: 4

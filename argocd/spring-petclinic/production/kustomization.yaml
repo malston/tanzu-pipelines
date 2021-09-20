@@ -4,4 +4,4 @@ namePrefix: prod-
 patches:
 - service.yaml
 - deployment.yaml
-namespace: fortune-app-production
+namespace: spring-petclinic-production
