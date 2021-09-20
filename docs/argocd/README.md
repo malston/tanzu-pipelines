@@ -134,7 +134,16 @@ Deploy the Production version of the Spring PetClinic Application. This version 
 
 - 4 replicas in the deployment
 - Service Type of `LoadBalancer` to expose the application outside the Kubernetes cluster.
+- Container image to ensure the application is pulled a safe location and the name-tag pair reference is resolved to a digest reference
 - Deployed to the "spring-petclinic-production" Namespace in our Kubernetes cluster.
+
+Run the following command to resolve the container image
+
+```sh
+CURRENT_APP_IMAGE=$(yq e .spec.template.spec.containers[0].image argocd/spring-petclinic/production/deployment.yaml)
+IMAGE=$(kustomize build argocd/spring-petclinic/production | kbld -f - | grep -e 'image:' | awk '{print $NF}')
+sed -i "s|$CURRENT_APP_IMAGE|$IMAGE|" argocd/spring-petclinic/production/deployment.yaml
+```
 
 ```sh
 $ argocd app create spring-petclinic-prod \
