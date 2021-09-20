@@ -178,5 +178,7 @@ kubectl port-forward deployment/dev-spring-petclinic 8080 -n spring-petclinic-de
 - Production using the Load Balancer IP
 
 ```sh
-open http://$(kubectl get services prod-petclinic-service -n spring-petclinic-production -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+open http://$(kubectl get services prod-spring-petclinic-service -n spring-petclinic-production -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 ```
+
+![Image of App](../spring-petclinic-app.png)
