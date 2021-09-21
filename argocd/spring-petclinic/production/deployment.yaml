@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - image: harbor.markalston.net/tanzu/spring-petclinic@sha256:3edbfe9263960bc81514cee4352b5251499cad3b74da388caca193da319f2dfb
+      - image: harbor.markalston.net/tanzu/spring-petclinic@sha256:da503c9f66161073e486194f8ced5897bb7a58ec5c7ca1838c758c6af2b8abba
         name: spring-petclinic
         ports:
         - containerPort: 8080
