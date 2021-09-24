@@ -1,10 +1,25 @@
 # Kustomize Application
 
+## Prerequisites
+
+Install the following tools
+
+- pack
+- kbld
+- yq
+
 ## Build/Run locally
+
+Build the app using `pack`:
 
 ```sh
 cd ~/workspace/kotlin-sample-app
 pack build applications/kotlin
+```
+
+Test locally with Docker
+
+```sh
 docker run --rm --tty --publish 8080:8080 applications/kotlin
 curl -s http://localhost:8080/actuator/health | jq .
 ```
