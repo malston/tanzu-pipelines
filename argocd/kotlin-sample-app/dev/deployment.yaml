@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlin-sample-app
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - image: registry.pez.joecool.cc/kpack/kotlin-sample-app:b1.20210923.224636
+        name: kotlin-sample-app
+        ports:
+        - containerPort: 8080
+          protocol: TCP

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # annotations:
+  #   link.argocd.argoproj.io/external-link: kotlin-sample-app-service.default.svc.cluster.local
+  labels:
+    app: kotlin-sample-app
+    source: freshcloud
+  name: kotlin-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-sample-app
+  template:
+    metadata:
+      labels:
+        app: kotlin-sample-app
+      annotations:
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - image: malston/kotlin-sample-app:0.0.1
+        name: kotlin-sample-app
+        ports:
+        - containerPort: 8080
+          protocol: TCP
