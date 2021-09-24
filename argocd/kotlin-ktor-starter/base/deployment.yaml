@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # annotations:
+  #   link.argocd.argoproj.io/external-link: kotlin-ktor-starter-service.default.svc.cluster.local
+  labels:
+    app: kotlin-ktor-starter
+  name: kotlin-ktor-starter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-ktor-starter
+  template:
+    metadata:
+      labels:
+        app: kotlin-ktor-starter
+      annotations:
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - image: malston/kotlin-ktor-starter:2.5.0
+        name: kotlin-ktor-starter
+        ports:
+        - containerPort: 8080
+          protocol: TCP

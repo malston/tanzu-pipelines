@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlin-ktor-starter
+spec:
+  replicas: 4
+  template:
+    spec:
+      containers:
+      - image: registry.pez.joecool.cc/kpack/kotlin-ktor-starter@sha256:b20a8b321717188c6a280cbaad8507ab5c4939081072fc7be456dbc8d595446c
+        name: kotlin-ktor-starter
+        ports:
+        - containerPort: 8080
+          protocol: TCP
