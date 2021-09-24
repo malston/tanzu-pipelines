@@ -13,7 +13,8 @@ Install the following tools
 Build the app using `pack`:
 
 ```sh
-cd ~/workspace/kotlin-sample-app
+git clone https://github.com/malston/kotlin-sample-app.git
+cd kotlin-sample-app
 pack build applications/kotlin
 ```
 
@@ -45,14 +46,12 @@ docker push registry.example.com/kpack/kotlin-sample-app:0.0.1
 View change first
 
 ```sh
-cd ~/workspace/tanzu-pipelines
 kustomize build argocd/kotlin-sample-app/production | kbld -f -
 ```
 
 Update using `yq` and `kbld`
 
 ```sh
-cd ~/workspace/tanzu-pipelines
 CURRENT_APP_IMAGE=$(yq e .spec.template.spec.containers[0].image argocd/kotlin-sample-app/production/deployment.yaml)
 IMAGE=$(kustomize build argocd/kotlin-sample-app/production | kbld -f - | grep -e 'image:' | awk '{print $NF}')
 sed -i "s|$CURRENT_APP_IMAGE|$IMAGE|" argocd/kotlin-sample-app/production/deployment.yaml
