@@ -4,9 +4,9 @@
 
 Install the following tools
 
-- pack
-- kbld
-- yq
+- [pack](https://github.com/buildpacks/pack)
+- [kbld](https://carvel.dev/kbld/)
+- [yq](https://github.com/mikefarah/yq)
 
 ## Build/Run locally
 
