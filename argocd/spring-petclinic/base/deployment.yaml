@@ -5,6 +5,7 @@ metadata:
   #   link.argocd.argoproj.io/external-link: spring-petclinic-service.default.svc.cluster.local
   labels:
     app: spring-petclinic
+    source: freshcloud
   name: spring-petclinic
 spec:
   replicas: 1

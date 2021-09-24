@@ -5,6 +5,7 @@ metadata:
   #   link.argocd.argoproj.io/external-link: kotlin-ktor-starter-service.default.svc.cluster.local
   labels:
     app: kotlin-ktor-starter
+    source: freshcloud
   name: kotlin-ktor-starter
 spec:
   replicas: 1
