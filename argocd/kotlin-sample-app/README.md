@@ -14,15 +14,15 @@ curl -s http://localhost:8080/actuator/health | jq .
 Docker:
 
 ```sh
-docker tag applications/kotlin:latest registry.pez.joecool.cc/kpack/kotlin-sample-app:0.0.1
 docker tag applications/kotlin:latest malston/kotlin-sample-app:0.0.1
+docker push malston/kotlin-sample-app:0.0.1
 ```
 
 Private Registry:
 
 ```sh
-docker push malston/kotlin-sample-app:0.0.1
-docker push registry.pez.joecool.cc/kpack/kotlin-sample-app:0.0.1
+docker tag applications/kotlin:latest registry.example.com/kpack/kotlin-sample-app:0.0.1
+docker push registry.example.com/kpack/kotlin-sample-app:0.0.1
 ```
 
 ## Update the digest reference on production image
