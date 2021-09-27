@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - image: registry.pez.joecool.cc/kpack/spring-petclinic@sha256:479bacfa36f5e5a8e1eadea8d2ccf47d04031ca3107c488bf3302086599b95f5
+      - image: registry.pez.joecool.cc/kpack/spring-petclinic
         name: spring-petclinic
         ports:
         - containerPort: 8080

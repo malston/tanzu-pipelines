@@ -1,6 +1,11 @@
 resources:
 - ./../base
 namePrefix: dev-
-patches:
+patchesStrategicMerge:
 - deployment.yaml
 namespace: spring-petclinic-development
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- digest: sha256:479bacfa36f5e5a8e1eadea8d2ccf47d04031ca3107c488bf3302086599b95f5
+  name: registry.pez.joecool.cc/kpack/spring-petclinic
