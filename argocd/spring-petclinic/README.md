@@ -60,7 +60,7 @@ sed -i "s|$CURRENT_APP_IMAGE|$LATEST_IMAGE|" argocd/spring-petclinic/production/
 Or using `kustomize`
 
 ```sh
-LATEST_IMAGE=$(kubectl get image "$APP_NAME-image" -n "$APP_NAME" -o jsonpath="{.status.latestImage}")
+LATEST_IMAGE=$(kubectl get image spring-petclinic-image -n spring-petclinic -o jsonpath="{.status.latestImage}")
 cd argocd/spring-petclinic/dev
 kustomize edit set image "$LATEST_IMAGE"
 ```
