@@ -16,9 +16,9 @@ usage(){
 APP_NAME=${1:-spring-petclinic}
 ENV=${2:-dev}
 
-LATEST_IMAGE=$(kubectl get image spring-petclinic-image -n spring-petclinic -o jsonpath="{.status.latestImage}")
+LATEST_IMAGE=$(kubectl get image "$APP_NAME-image" -n "$APP_NAME" -o jsonpath="{.status.latestImage}")
 cd "$SCRIPT_DIR/../argocd/$APP_NAME/$ENV/"
 kustomize edit set image "$LATEST_IMAGE"
 cd -
 
-git diff "$SCRIPT_DIR/../argocd/$APP_NAME/$ENV/deployment.yaml"
+git diff "$SCRIPT_DIR/../argocd/$APP_NAME/$ENV/"
