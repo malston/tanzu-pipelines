@@ -7,5 +7,5 @@ namespace: spring-petclinic-development
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-- digest: sha256:479bacfa36f5e5a8e1eadea8d2ccf47d04031ca3107c488bf3302086599b95f5
+- digest: sha256:3cb09182d307cd22bc652e74bb677ba2791fbef60f5aa8e6604ad4b65d1e089a
   name: registry.pez.joecool.cc/kpack/spring-petclinic
