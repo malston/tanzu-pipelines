@@ -52,7 +52,15 @@ kustomize build argocd/spring-petclinic/production | kbld -f -
 Update using `yq` and `kbld`
 
 ```sh
-CURRENT_APP_IMAGE=$(yq e .spec.template.spec.containers[0].image argocd/spring-petclinic-tanzu/production/deployment.yaml)
-IMAGE=$(kustomize build argocd/spring-petclinic-tanzu/production | kbld -f - | grep -e 'image:' | awk '{print $NF}')
-sed -i "s|$CURRENT_APP_IMAGE|$IMAGE|" argocd/spring-petclinic-tanzu/production/deployment.yaml
+CURRENT_APP_IMAGE=$(yq e .spec.template.spec.containers[0].image argocd/spring-petclinic/production/deployment.yaml)
+LATEST_IMAGE=$(kustomize build argocd/spring-petclinic/production | kbld -f - | grep -e 'image:' | awk '{print $NF}')
+sed -i "s|$CURRENT_APP_IMAGE|$LATEST_IMAGE|" argocd/spring-petclinic/production/deployment.yaml
+```
+
+Or using `kustomize`
+
+```sh
+LATEST_IMAGE=$(kubectl get image "$APP_NAME-image" -n "$APP_NAME" -o jsonpath="{.status.latestImage}")
+cd argocd/spring-petclinic/dev
+kustomize edit set image "$LATEST_IMAGE"
 ```
