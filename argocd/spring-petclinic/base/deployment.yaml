@@ -22,7 +22,7 @@ spec:
         prometheus.io/scrape: 'true'
     spec:
       containers:
-      - image: malston/spring-petclinic:2.5.0
+      - image: registry.pez.joecool.cc/kpack/spring-petclinic
         name: spring-petclinic
         ports:
         - containerPort: 8080

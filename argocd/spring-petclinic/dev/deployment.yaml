@@ -4,11 +4,3 @@ metadata:
   name: spring-petclinic
 spec:
   replicas: 2
-  template:
-    spec:
-      containers:
-      - image: registry.pez.joecool.cc/kpack/spring-petclinic
-        name: spring-petclinic
-        ports:
-        - containerPort: 8080
-          protocol: TCP
