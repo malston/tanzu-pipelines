@@ -5,8 +5,7 @@
 Install the following tools
 
 - [pack](https://github.com/buildpacks/pack)
-- [kbld](https://carvel.dev/kbld/)
-- [yq](https://github.com/mikefarah/yq)
+- [kustomize](https://kustomize.io/)
 
 ## Build/Run locally
 
@@ -41,26 +40,23 @@ docker tag applications/maven:latest registry.example.com/kpack/spring-petclinic
 docker push registry.example.com/kpack/spring-petclinic-tanzu:0.0.1
 ```
 
-## Update the digest reference on production image
+## Update image to the latest digest reference
 
-View change first
+1. Get the image you want to use in your manifest
 
-```sh
-kustomize build argocd/spring-petclinic/production | kbld -f -
-```
+    ```sh
+    LATEST_IMAGE=$(kubectl get image spring-petclinic-image -n spring-petclinic -o jsonpath="{.status.latestImage}")
+    ```
 
-Update using `yq` and `kbld`
+1. Then, go into the directory where the `kustomization.yaml` and `deployment.yaml` is
+for the application you want to deploy
 
-```sh
-CURRENT_APP_IMAGE=$(yq e .spec.template.spec.containers[0].image argocd/spring-petclinic/production/deployment.yaml)
-LATEST_IMAGE=$(kustomize build argocd/spring-petclinic/production | kbld -f - | grep -e 'image:' | awk '{print $NF}')
-sed -i "s|$CURRENT_APP_IMAGE|$LATEST_IMAGE|" argocd/spring-petclinic/production/deployment.yaml
-```
+    ```sh
+    cd argocd/spring-petclinic/production
+    ```
 
-Or using `kustomize`
+1. Set the image using `kustomize` to the image retrieved in the first step above
 
-```sh
-LATEST_IMAGE=$(kubectl get image spring-petclinic-image -n spring-petclinic -o jsonpath="{.status.latestImage}")
-cd argocd/spring-petclinic/dev
-kustomize edit set image "$LATEST_IMAGE"
-```
+    ```sh
+    kustomize edit set image "$LATEST_IMAGE"
+    ```
