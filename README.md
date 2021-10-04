@@ -9,7 +9,7 @@
         3. App is deployed automatically to a dev namespace
     2. Show the `kustomize` deployment manifests
     3. Change the application running on workstation
-        1. Once a Developer is ready to push their changes to Github, they first run `kpack`, and test it locally
+        1. Once a Developer is ready to push their changes to Github, they first run `pack`, and test it locally
         2. Make a commit and push to Github
     4. Show that the pipeline is triggered and wait for it to get through the build phase
     5. Grab the commit that passed the scanning stage
